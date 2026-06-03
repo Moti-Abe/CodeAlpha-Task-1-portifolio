@@ -282,9 +282,10 @@ body.light .site-header.scrolled {
 
 .nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   padding: var(--spacing-md) 0;
+  gap: var(--spacing-lg);
 }
 
 .brand {
@@ -367,6 +368,7 @@ body.light .site-header.scrolled {
   list-style: none;
   gap: var(--spacing-lg);
   align-items: center;
+  margin-left: auto;
 }
 
 /* Theme Toggle Button */
@@ -383,7 +385,7 @@ body.light .site-header.scrolled {
   cursor: pointer;
   transition: all var(--transition-fast);
   padding: 0;
-  margin-left: auto;
+  margin-left: var(--spacing-lg);
 }
 
 .theme-toggle:hover {
