@@ -11,6 +11,55 @@ const siteHeader = document.querySelector('.site-header');
 const contactForm = document.getElementById('contact-form');
 const formStatus = document.getElementById('form-status');
 const heroCanvas = document.getElementById('hero-canvas');
+const themeToggle = document.getElementById('theme-toggle');
+
+// ==================== Theme Toggle ====================
+
+// Initialize theme on page load
+const initTheme = () => {
+  // Check if user has a saved preference
+  const savedTheme = localStorage.getItem('theme');
+  
+  // Check system preference
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  
+  // Determine theme: saved > system > default (dark)
+  const theme = savedTheme || (prefersDark ? 'dark' : 'dark');
+  
+  applyTheme(theme);
+};
+
+// Apply theme
+const applyTheme = (theme) => {
+  const body = document.body;
+  
+  if (theme === 'light') {
+    body.classList.remove('dark');
+    body.classList.add('light');
+  } else {
+    body.classList.remove('light');
+    body.classList.add('dark');
+  }
+  
+  // Save preference
+  localStorage.setItem('theme', theme);
+};
+
+// Toggle theme
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    const currentTheme = document.body.classList.contains('light') ? 'light' : 'dark';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    applyTheme(newTheme);
+  });
+}
+
+// Apply theme when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initTheme);
+} else {
+  initTheme();
+}
 
 // ==================== Loading Animation ====================
 window.addEventListener('load', () => {
