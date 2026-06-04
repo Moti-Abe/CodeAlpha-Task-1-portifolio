@@ -868,8 +868,8 @@ body.light .nav-link {
 }
 
 .social-icon {
-  width: 48px;
-  height: 48px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   background: rgba(0, 229, 184, 0.08);
   border: 2px solid var(--accent);
@@ -879,7 +879,7 @@ body.light .nav-link {
   color: var(--accent);
   transition: all var(--transition-fast);
   text-decoration: none;
-  font-size: 1.25rem;
+  font-size: 0.75rem;
   font-weight: 600;
   position: relative;
   animation: slideInRight 0.8s ease-out backwards;
@@ -942,9 +942,9 @@ body.light .nav-link {
   }
 
   .social-icon {
-    width: 40px;
-    height: 40px;
-    font-size: 1rem;
+    width: 26px;
+    height: 26px;
+    font-size: 0.65rem;
   }
 
   .name {
