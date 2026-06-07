@@ -61,6 +61,66 @@ if (document.readyState === 'loading') {
   initTheme();
 }
 
+// ==================== Typing Animation ====================
+
+const initTypingAnimation = () => {
+  const typingText = document.querySelector('.typing-text');
+  if (!typingText) return;
+
+  const titles = [
+    'Frontend Engineer',
+    'Competitive Programmer',
+    'Fitness Enthusiast',
+    'Senior Computer Science Student'
+  ];
+
+  let titleIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  const typeSpeed = 80;
+  const deleteSpeed = 40;
+  const delayBetweenTitles = 2000;
+
+  const type = () => {
+    const currentTitle = titles[titleIndex];
+    
+    if (isDeleting) {
+      // Deleting characters
+      charIndex--;
+      typingText.textContent = currentTitle.substring(0, charIndex);
+      
+      if (charIndex === 0) {
+        isDeleting = false;
+        titleIndex = (titleIndex + 1) % titles.length;
+        setTimeout(type, 500);
+        return;
+      }
+      setTimeout(type, deleteSpeed);
+    } else {
+      // Typing characters
+      charIndex++;
+      typingText.textContent = currentTitle.substring(0, charIndex);
+      
+      if (charIndex === currentTitle.length) {
+        isDeleting = true;
+        setTimeout(type, delayBetweenTitles);
+        return;
+      }
+      setTimeout(type, typeSpeed);
+    }
+  };
+
+  // Start typing after a short delay for the fade-in animation
+  setTimeout(type, 400);
+};
+
+// Initialize typing animation
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initTypingAnimation);
+} else {
+  initTypingAnimation();
+}
+
 // ==================== Loading Animation ====================
 window.addEventListener('load', () => {
   // Simulate loading time

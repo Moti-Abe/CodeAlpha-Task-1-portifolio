@@ -753,7 +753,34 @@ body.light .nav-link {
   opacity: 0;
   animation: fadeInDown 0.6s ease-out 0.3s forwards;
   letter-spacing: 0.05em;
-  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15em;
+}
+
+.typing-text {
+  display: inline-block;
+  min-width: 1em;
+  position: relative;
+}
+
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.2em;
+  background-color: var(--accent);
+  margin-left: 0.05em;
+  animation: blink 0.6s infinite;
+  vertical-align: middle;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
 }
 
 .title {
@@ -794,17 +821,28 @@ body.light .nav-link {
   max-width: 280px;
   height: 280px;
   border-radius: 50%;
-  border: 3px dashed var(--accent);
+  border: 3px solid transparent;
+  background: linear-gradient(var(--bg-tertiary), var(--bg-tertiary)) padding-box,
+              linear-gradient(135deg, #00e5b8, #1ef7da, #00e5b8, #6366f1, #00e5b8) border-box;
+  background-clip: padding-box;
   overflow: hidden;
   flex-shrink: 0;
-  background: var(--bg-tertiary);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   z-index: 1;
-  animation: floatUp 0.8s ease-out 0.1s both, float 6s ease-in-out 0.8s infinite;
-  box-shadow: 0 0 40px rgba(0, 229, 184, 0.2), inset 0 0 30px rgba(0, 229, 184, 0.05);
+  animation: floatUp 0.8s ease-out 0.1s both, float 6s ease-in-out 0.8s infinite, rotateBorder 4s linear infinite;
+  box-shadow: 0 0 60px rgba(0, 229, 184, 0.3), inset 0 0 30px rgba(0, 229, 184, 0.08);
+}
+
+@keyframes rotateBorder {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
 }
 
 @media (min-width: 1024px) {
@@ -869,22 +907,22 @@ body.light .nav-link {
 .hero-profile::before {
   content: '';
   position: absolute;
-  inset: -2px;
+  inset: -8px;
   border-radius: 50%;
-  background: linear-gradient(45deg, #00e5b8, #1ef7da, #00e5b8);
-  opacity: 0;
+  background: radial-gradient(circle, rgba(0, 229, 184, 0.4) 0%, rgba(0, 229, 184, 0) 70%);
+  opacity: 0.5;
   animation: pulseGlow 2s ease-in-out infinite;
   z-index: -1;
 }
 
 @keyframes pulseGlow {
   0%, 100% {
-    opacity: 0;
+    opacity: 0.3;
     transform: scale(1);
   }
   50% {
-    opacity: 0.5;
-    transform: scale(1.05);
+    opacity: 0.6;
+    transform: scale(1.08);
   }
 }
 
