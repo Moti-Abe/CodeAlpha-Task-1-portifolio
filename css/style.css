@@ -820,6 +820,7 @@ body.light .nav-link {
   width: 100%;
   max-width: 280px;
   height: 280px;
+  aspect-ratio: 1;
   border-radius: 50%;
   border: 3px solid transparent;
   background: linear-gradient(var(--bg-tertiary), var(--bg-tertiary)) padding-box,
@@ -832,7 +833,7 @@ body.light .nav-link {
   justify-content: center;
   position: relative;
   z-index: 1;
-  animation: floatUp 0.8s ease-out 0.1s both, float 6s ease-in-out 0.8s infinite, rotateBorder 4s linear infinite;
+  animation: floatUp 0.8s ease-out 0.1s both, float 6s ease-in-out 0.8s infinite;
   box-shadow: 0 0 60px rgba(0, 229, 184, 0.3), inset 0 0 30px rgba(0, 229, 184, 0.08);
 }
 
@@ -849,6 +850,7 @@ body.light .nav-link {
   .hero-profile {
     max-width: 350px;
     height: 350px;
+    aspect-ratio: 1;
   }
 }
 
@@ -923,6 +925,73 @@ body.light .nav-link {
   50% {
     opacity: 0.6;
     transform: scale(1.08);
+  }
+}
+
+.hero-profile::after {
+  content: '';
+  position: absolute;
+  inset: -15px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg,
+    rgba(0, 229, 184, 0.8) 0deg,
+    rgba(0, 229, 184, 0.8) 8deg,
+    transparent 8deg,
+    transparent 30deg,
+    rgba(0, 229, 184, 0.8) 30deg,
+    rgba(0, 229, 184, 0.8) 38deg,
+    transparent 38deg,
+    transparent 60deg,
+    rgba(0, 229, 184, 0.8) 60deg,
+    rgba(0, 229, 184, 0.8) 68deg,
+    transparent 68deg,
+    transparent 90deg,
+    rgba(0, 229, 184, 0.8) 90deg,
+    rgba(0, 229, 184, 0.8) 98deg,
+    transparent 98deg,
+    transparent 120deg,
+    rgba(0, 229, 184, 0.8) 120deg,
+    rgba(0, 229, 184, 0.8) 128deg,
+    transparent 128deg,
+    transparent 150deg,
+    rgba(0, 229, 184, 0.8) 150deg,
+    rgba(0, 229, 184, 0.8) 158deg,
+    transparent 158deg,
+    transparent 180deg,
+    rgba(0, 229, 184, 0.8) 180deg,
+    rgba(0, 229, 184, 0.8) 188deg,
+    transparent 188deg,
+    transparent 210deg,
+    rgba(0, 229, 184, 0.8) 210deg,
+    rgba(0, 229, 184, 0.8) 218deg,
+    transparent 218deg,
+    transparent 240deg,
+    rgba(0, 229, 184, 0.8) 240deg,
+    rgba(0, 229, 184, 0.8) 248deg,
+    transparent 248deg,
+    transparent 270deg,
+    rgba(0, 229, 184, 0.8) 270deg,
+    rgba(0, 229, 184, 0.8) 278deg,
+    transparent 278deg,
+    transparent 300deg,
+    rgba(0, 229, 184, 0.8) 300deg,
+    rgba(0, 229, 184, 0.8) 308deg,
+    transparent 308deg,
+    transparent 330deg,
+    rgba(0, 229, 184, 0.8) 330deg,
+    rgba(0, 229, 184, 0.8) 338deg,
+    transparent 338deg);
+  animation: rotateDashes 3s linear infinite;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes rotateDashes {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 
