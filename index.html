@@ -8,7 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="dark">
@@ -122,7 +123,7 @@
       <h2 class="section-title">About</h2>
       <div class="about-grid">
         <div class="about-text">
-          <p>Computer Science student at Arsi University with a strong focus on algorithms, web and mobile development. Experienced in mentoring competitive programmers and building end-to-end applications.</p>
+          <p>Computer Science student at Arsi University with a strong interest in algorithms, web development, and mobile application development. Passionate about building AI-powered web and mobile applications, as well as developing innovative tools that solve real-world problems.</p>
           <p>My career goal is to contribute to impactful software products, excel in algorithmic problem solving, and grow as a full-stack engineer with expertise in mobile development.</p>
         </div>
         <div class="about-card">
@@ -131,7 +132,7 @@
             <ul>
               <li><strong>Education:</strong> B.Sc. Computer Science — Arsi University</li>
               <li><strong>Competitive programming:</strong> 500+ problems solved</li>
-              <li><strong>Tools:</strong> Git, VS Code, Android Studio</li>
+              <li><strong>Tech Stack:</strong> Web and Mobile</li>
               <li><strong>Location:</strong> Meki, Ethiopia</li>
             </ul>
             <a class="btn outline" href="#education">See Education</a>
@@ -188,7 +189,6 @@
           <h4>Mobile</h4>
           <div class="chips">
             <span class="chip">Flutter</span>
-            <span class="chip">Kotlin</span>
           </div>
         </div>
         <div class="skill-group">
@@ -212,7 +212,7 @@
       <div class="cards-grid">
         <article class="project card glass">
           <div class="project-screenshot" aria-hidden>
-            <div class="screenshot-placeholder">Screenshot</div>
+            <img loading="lazy" src="assets/images/digital_trainer_web.png" alt="Digital Trainer website screenshot">
           </div>
           <div class="project-body">
             <h3>Digital Trainer</h3>
@@ -228,7 +228,7 @@
 
         <article class="project card glass">
           <div class="project-screenshot" aria-hidden>
-            <div class="screenshot-placeholder">Mobile</div>
+            <img loading="lazy" src="assets/images/Well fly app.png" alt="WellFly flight app screenshot">
           </div>
           <div class="project-body">
             <h3>WellFly</h3>
@@ -293,8 +293,7 @@
 
   <footer class="site-footer">
     <div class="container">
-      <p>© 2026 Moti Abe. Built with HTML, CSS & JavaScript.</p>
-      <p class="muted">Resume available in /assets/resume (add your PDF file there)</p>
+      <p>© 2026 Moti Abe.</p>
     </div>
   </footer>
 

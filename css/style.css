@@ -88,6 +88,18 @@ body {
   padding-top: 70px;
 }
 
+@media (max-width: 768px) {
+  body {
+    padding-top: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding-top: 56px;
+  }
+}
+
 body.dark {
   --bg-primary: #0d0d1a;
   --bg-secondary: #1a1a2e;
@@ -213,10 +225,6 @@ a:hover {
 }
 
 @media (max-width: 480px) {
-  body {
-    padding-top: 60px;
-  }
-
   .hero {
     min-height: auto;
     padding: var(--spacing-xl) 0;
@@ -378,6 +386,12 @@ body.light .site-header.scrolled {
   gap: var(--spacing-lg);
 }
 
+@media (max-width: 768px) {
+  .nav {
+    padding: var(--spacing-sm) 0;
+  }
+}
+
 .brand {
   font-family: var(--font-family-display);
   font-size: var(--font-size-xl);
@@ -386,6 +400,14 @@ body.light .site-header.scrolled {
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
+  margin-left: 30px;
+  margin-right: var(--spacing-sm);
+}
+
+@media (min-width: 769px) {
+  .brand {
+    margin-left: 30px;
+  }
 }
 
 .brand::before {
@@ -478,6 +500,13 @@ body.light .site-header.scrolled {
   margin-left: var(--spacing-lg);
 }
 
+@media (max-width: 768px) {
+  .theme-toggle {
+    margin-left: 0;
+    margin-right: var(--spacing-sm);
+  }
+}
+
 .theme-toggle:hover {
   background: rgba(0, 229, 184, 0.2);
   border-color: var(--accent);
@@ -560,6 +589,14 @@ body.light .nav-link {
 @media (max-width: 768px) {
   .nav-toggle {
     display: flex;
+    order: 3;
+    margin-left: auto;
+  }
+
+  .theme-toggle {
+    order: 2;
+    margin-left: auto;
+    margin-right: var(--spacing-md);
   }
 
   .nav-links {
@@ -1633,6 +1670,13 @@ body.light .nav-link {
   overflow: hidden;
 }
 
+.project-screenshot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .project-screenshot::before {
   content: '';
   position: absolute;
@@ -1801,6 +1845,50 @@ body.light .nav-link {
   font-size: var(--font-size-sm);
   transition: all var(--transition-base);
   line-height: 1.5;
+}
+
+/* ==================== */
+/* Performance Optimization */
+/* ==================== */
+
+/* Respect user's animation preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Optimize animated elements */
+.hero-profile,
+.hero-content,
+.hero-profile-section,
+.name,
+.scroll-indicator,
+.brand::before,
+.card {
+  will-change: auto;
+}
+
+/* Lazy load images */
+img[loading="lazy"] {
+  background-color: var(--bg-tertiary);
+}
+
+/* Optimize hover states */
+@media (hover: hover) {
+  .btn,
+  .nav-link,
+  .card {
+    transition: all var(--transition-base);
+  }
 }
 
 .contact-form input::placeholder,
