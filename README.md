@@ -4,7 +4,7 @@ This portfolio website was developed as part of my internship tasks at **CodeAlp
 
 ## 🌐 Live Demo
 
-https://moti-abe.github.io/portifolio
+ https://moti-abe.github.io/CodeAlpha-Task-1-portifolio/
 
 ## 🛠️ Built With
 
