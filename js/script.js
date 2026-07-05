@@ -12,6 +12,7 @@ const contactForm = document.getElementById('contact-form');
 const formStatus = document.getElementById('form-status');
 const heroCanvas = document.getElementById('hero-canvas');
 const themeToggle = document.getElementById('theme-toggle');
+const heroProfile = document.querySelector('.hero-profile');
 
 // ==================== Theme Toggle ====================
 
@@ -119,6 +120,36 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initTypingAnimation);
 } else {
   initTypingAnimation();
+}
+
+// ==================== Profile Motion ====================
+
+const initProfileMotion = () => {
+  if (!heroProfile || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+
+  const resetTilt = () => {
+    heroProfile.style.setProperty('--profile-tilt-x', '0deg');
+    heroProfile.style.setProperty('--profile-tilt-y', '0deg');
+  };
+
+  heroProfile.addEventListener('pointermove', (event) => {
+    const rect = heroProfile.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+
+    heroProfile.style.setProperty('--profile-tilt-x', `${x * 10}deg`);
+    heroProfile.style.setProperty('--profile-tilt-y', `${y * -10}deg`);
+  });
+
+  heroProfile.addEventListener('pointerleave', resetTilt);
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initProfileMotion);
+} else {
+  initProfileMotion();
 }
 
 // ==================== Loading Animation ====================
