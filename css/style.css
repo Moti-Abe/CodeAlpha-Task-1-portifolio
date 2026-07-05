@@ -375,7 +375,7 @@ body.light .site-header {
 }
 
 body.light .brand {
-  color: #171717;
+  color: #000000;
 }
 
 .site-header.scrolled {
@@ -397,6 +397,12 @@ body.light .site-header.scrolled {
   gap: var(--spacing-lg);
 }
 
+.nav.container {
+  max-width: none;
+  padding-left: clamp(1rem, 3.5vw, 2.5rem);
+  padding-right: clamp(1rem, 3.5vw, 2.5rem);
+}
+
 @media (max-width: 768px) {
   .nav {
     padding: var(--spacing-sm) 0;
@@ -407,12 +413,17 @@ body.light .site-header.scrolled {
   font-family: var(--font-family-display);
   font-size: clamp(1.25rem, 1.5vw, 1.6rem);
   font-weight: 800;
-  color: #eef4ff;
+  color: #ffffff;
   display: flex;
   align-items: center;
+  flex-shrink: 0;
+  white-space: nowrap;
   gap: var(--spacing-xs);
   margin-left: 0;
   margin-right: var(--spacing-sm);
+}
+
+.brand-accent {
   background: linear-gradient(110deg, #5f4be8 0%, #8b43d6 42%, #f09745 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -426,13 +437,7 @@ body.light .site-header.scrolled {
 }
 
 .brand::before {
-  content: '';
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  background: var(--accent);
-  border-radius: 50%;
-  animation: pulse 2s ease-in-out infinite;
+  content: none;
 }
 
 @keyframes pulse {
@@ -608,9 +613,14 @@ body.light .nav-link {
     margin-left: auto;
   }
 
+  .brand {
+    margin-right: auto;
+    font-size: clamp(1.05rem, 4.2vw, 1.25rem);
+  }
+
   .theme-toggle {
     order: 2;
-    margin-left: auto;
+    margin-left: var(--spacing-sm);
     margin-right: var(--spacing-md);
   }
 
@@ -635,7 +645,8 @@ body.light .nav-link {
   }
 
   .nav-links.active {
-    max-height: 400px;
+    max-height: min(70vh, 420px);
+    overflow-y: auto;
   }
 
   .nav-link {
@@ -660,7 +671,7 @@ body.light .nav-link {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  overflow: hidden;
+  overflow: visible;
   padding: var(--spacing-xl) 0;
   text-align: center;
 }
@@ -2256,6 +2267,7 @@ img[loading="lazy"] {
   justify-content: center;
   text-align: left;
   background: transparent;
+  overflow: visible;
 }
 
 body.light .hero.container {
@@ -2298,16 +2310,21 @@ body.light .hero-canvas {
 }
 
 .name {
-  font-size: clamp(4rem, 6.4vw, 6.9rem);
+  font-size: clamp(3.7rem, 5.9vw, 6.3rem);
   line-height: 0.86;
   font-weight: 900;
   letter-spacing: 0;
   margin-bottom: 1.4rem;
-  color: #eef4ff;
+  color: #ffffff;
 }
 
 body.light .name {
-  color: #171717;
+  color: #000000;
+}
+
+.name-main {
+  display: block;
+  color: inherit;
 }
 
 .name-accent {
@@ -2431,9 +2448,14 @@ body.light .hero-buttons .btn:first-child {
 }
 
 .profile-ring-primary {
-  inset: -10px;
-  padding: 2px;
-  background: repeating-conic-gradient(from 0deg, rgba(0, 229, 184, 0.94) 0deg 3.6deg, transparent 3.6deg 8.6deg);
+  inset: -14px;
+  padding: 0;
+  background: none;
+  border: 4px dashed rgba(0, 229, 184, 0.98);
+  -webkit-mask: none;
+  mask: none;
+  filter: drop-shadow(0 0 12px rgba(0, 229, 184, 0.24));
+  z-index: 4;
 }
 
 .profile-ring-secondary {
@@ -2441,7 +2463,9 @@ body.light .hero-buttons .btn:first-child {
 }
 
 body.light .profile-ring-primary {
-  background: repeating-conic-gradient(from 0deg, rgba(0, 210, 178, 0.95) 0deg 3.6deg, transparent 3.6deg 8.6deg);
+  background: none;
+  border: 4px dashed rgba(0, 129, 108, 0.95);
+  filter: drop-shadow(0 0 8px rgba(0, 129, 108, 0.22));
 }
 
 body.light .profile-ring-secondary {
@@ -2534,7 +2558,7 @@ body.light .social-icon {
 @media (max-width: 1023px) {
   .hero.container {
     min-height: auto;
-    padding: 3rem 1.5rem;
+    padding: 3.25rem 1.5rem 2.5rem;
     text-align: center;
   }
 
@@ -2553,10 +2577,12 @@ body.light .social-icon {
 
   .hero-profile-section {
     order: 1;
+    width: 100%;
+    padding-top: 0.35rem;
   }
 
   .name {
-    font-size: clamp(3rem, 12vw, 5rem);
+    font-size: clamp(2.7rem, 10.5vw, 4.4rem);
   }
 
   .title-tag,
@@ -2578,17 +2604,30 @@ body.light .social-icon {
     flex-direction: row;
     order: 3;
     margin: 0;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 820px) {
+  .hero-profile {
+    width: min(66vw, 300px);
+    max-width: min(66vw, 300px);
+  }
+
+  .profile-ring-primary {
+    inset: -12px;
+    border-width: 3px;
   }
 }
 
 @media (max-width: 560px) {
   .hero.container {
-    padding: 2.5rem 1rem;
+    padding: 2.75rem 1rem 2.25rem;
   }
 
   .hero-profile {
-    width: min(74vw, 300px);
-    max-width: min(74vw, 300px);
+    width: min(74vw, 280px);
+    max-width: min(74vw, 280px);
   }
 
   .hero-buttons {
