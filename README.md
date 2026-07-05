@@ -1,22 +1,43 @@
-Moti Abe — Portfolio
+# 🚀 Personal Portfolio Website
 
-This repository contains a production-ready personal portfolio website built with pure HTML, CSS, and JavaScript.
+This portfolio website was developed as part of my internship tasks at **CodeAlpha**. It showcases my skills, projects, education, and experience as a Computer Science student and aspiring software developer.
 
-Project structure:
-/
-├── index.html
-├── css/
-│   └── style.css
-├── js/
-│   └── script.js
-├── assets/
-│   ├── images/ (add your profile and project images)
-│   └── resume/ (add your PDF resume here)
+## 🌐 Live Demo
 
-Notes:
-- The site uses a dark theme, smooth scrolling, scroll reveal animations, and a canvas-based animated background.
-- Replace placeholder links for GitHub, LeetCode, Codeforces, LinkedIn with your profiles.
-- Add your resume PDF to assets/resume and any screenshots to assets/images.
-- To publish: upload files to any static host (Vercel, Netlify, GitHub Pages).
+ https://moti-abe.github.io/CodeAlpha-Task-1-portifolio/
 
-Contact: motiabe8@gmail.com
+## 🛠️ Built With
+
+* HTML5
+* CSS3
+* JavaScript
+* Git & GitHub
+
+## ✨ Features
+
+* Responsive design
+* Modern UI/UX
+* Project showcase
+* Skills section
+* Education & experience timeline
+* Contact information
+* Smooth animations and interactions
+
+## 🚀 Run Locally
+
+```bash
+git clone https://github.com/Moti-Abe/portifolio.git
+cd portifolio
+```
+
+Open `index.html` in your browser.
+
+## 📌 Purpose
+
+This project was completed as a portfolio development task during my **CodeAlpha Internship Program**, demonstrating front-end development skills and personal branding.
+
+## 👨‍💻 Author
+
+**Moti Abe**
+
+* GitHub: https://github.com/Moti-Abe
