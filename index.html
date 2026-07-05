@@ -16,11 +16,14 @@
   <!-- Loading overlay -->
   <div id="loader" class="loader">
     <div class="loader-inner">
-      <svg width="80" height="80" viewBox="0 0 100 100" fill="none" aria-hidden>
-        <circle cx="50" cy="50" r="40" stroke="rgba(255,255,255,0.08)" stroke-width="10"></circle>
-        <circle cx="50" cy="50" r="30" stroke="var(--accent)" stroke-width="6" stroke-linecap="round" stroke-dasharray="47 141"></circle>
-      </svg>
-      <p>Loading portfolio...</p>
+      <div class="loader-mark" aria-hidden="true">
+        <span class="loader-ring loader-ring-outer"></span>
+        <span class="loader-ring loader-ring-inner"></span>
+        <span class="loader-core"></span>
+      </div>
+      <p class="loader-name">Moti <span>Abe</span></p>
+      <p class="loader-status">Crafting experience...</p>
+      <span class="loader-progress" aria-hidden="true"></span>
     </div>
   </div>
 

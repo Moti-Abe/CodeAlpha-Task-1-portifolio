@@ -154,12 +154,15 @@ if (document.readyState === 'loading') {
 
 // ==================== Loading Animation ====================
 window.addEventListener('load', () => {
-  // Simulate loading time
-  setTimeout(() => {
+  if (loader) {
     loader.classList.add('hidden');
-    // Trigger reveal animations
-    observeElements();
-  }, 1500);
+    setTimeout(() => {
+      loader.style.display = 'none';
+    }, 620);
+  }
+
+  // Trigger reveal animations after loader starts fading.
+  observeElements();
 });
 
 // ==================== Navigation ====================
