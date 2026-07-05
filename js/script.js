@@ -164,18 +164,47 @@ window.addEventListener('load', () => {
 
 // ==================== Navigation ====================
 
+const closeMobileMenu = () => {
+  navToggle.classList.remove('active');
+  navLinks.classList.remove('active');
+  navToggle.setAttribute('aria-expanded', 'false');
+};
+
 // Mobile menu toggle
 navToggle.addEventListener('click', () => {
-  navToggle.classList.toggle('active');
-  navLinks.classList.toggle('active');
+  const isOpen = navLinks.classList.toggle('active');
+  navToggle.classList.toggle('active', isOpen);
+  navToggle.setAttribute('aria-expanded', String(isOpen));
 });
 
 // Close menu when link clicked
 navItems.forEach(link => {
   link.addEventListener('click', () => {
-    navToggle.classList.remove('active');
-    navLinks.classList.remove('active');
+    closeMobileMenu();
   });
+});
+
+// Ensure mobile nav is closed when viewport changes.
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 768) {
+    closeMobileMenu();
+  }
+});
+
+// Close menu on outside click (mobile/tablet).
+document.addEventListener('click', (event) => {
+  if (window.innerWidth > 768) return;
+  const clickedInsideNav = event.target.closest('.nav');
+  if (!clickedInsideNav && navLinks.classList.contains('active')) {
+    closeMobileMenu();
+  }
+});
+
+// Close menu with Escape key.
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && navLinks.classList.contains('active')) {
+    closeMobileMenu();
+  }
 });
 
 // Smooth scrolling for navigation
