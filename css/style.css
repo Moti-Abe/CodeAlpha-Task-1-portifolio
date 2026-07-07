@@ -1535,6 +1535,14 @@ body.light .profile-ring-secondary {
   background: transparent;
 }
 
+@media (min-width: 769px) {
+  .section {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+}
+
+
 .section-title {
   font-size: var(--font-size-4xl);
   margin-bottom: var(--spacing-2xl);
@@ -1765,6 +1773,8 @@ body.light .profile-ring-secondary {
   padding: var(--spacing-lg);
 }
 
+
+
 .about-card ul {
   list-style: none;
   margin-bottom: var(--spacing-lg);
@@ -1962,6 +1972,17 @@ body.light .profile-ring-secondary {
 .container.experience-section {
   padding-left: clamp(1.5rem, 5vw, 4rem) !important;
   padding-right: clamp(1.5rem, 5vw, 4rem) !important;
+}
+
+@media (min-width: 769px) {
+  .experience-section {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+  .container.experience-section {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
 }
 
 .experience-section .experience-content {
@@ -2334,6 +2355,17 @@ img[loading="lazy"] {
     padding: var(--spacing-2xl) 0;
   }
 
+  .experience-section,
+  .container.experience-section {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .experience-section .experience-content {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
   .section-title {
     font-size: var(--font-size-2xl);
     margin-bottom: var(--spacing-lg);
@@ -2396,6 +2428,17 @@ img[loading="lazy"] {
 @media (max-width: 360px) {
   .section {
     padding: var(--spacing-xl) 0;
+  }
+
+  .experience-section,
+  .container.experience-section {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .experience-section .experience-content {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
   }
 
   .section-title {
