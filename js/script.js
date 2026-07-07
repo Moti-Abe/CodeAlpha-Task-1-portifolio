@@ -281,12 +281,14 @@ window.addEventListener('scroll', onScroll, { passive: true });
 // Intersection Observer for reveal animations
 const observeElements = () => {
   const revealElements = document.querySelectorAll('.reveal');
-  
+  // Pre-build index map so intersection callback is O(1) not O(n)
+  const indexMap = new Map();
+  revealElements.forEach((el, i) => indexMap.set(el, i));
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // Add a small delay based on element position for staggered effect
-        const delay = Array.from(revealElements).indexOf(entry.target) * 100;
+        const delay = (indexMap.get(entry.target) || 0) * 100;
         setTimeout(() => {
           entry.target.classList.add('visible');
         }, delay);
@@ -319,9 +321,11 @@ const initCanvas = () => {
   setCanvasSize();
   window.addEventListener('resize', setCanvasSize);
 
-  // Particle system
-  const particles = [];
-  const particleCount = 50;
+  // Particle count: fewer on mobile (half the pixels, half the work)
+  const isMobile = window.innerWidth < 768;
+  const particleCount = isMobile ? 25 : 50;
+  // Skip the O(n²) line-drawing loop on mobile CPUs entirely
+  const showLines = !isMobile;
 
   class Particle {
     constructor() {
@@ -357,7 +361,7 @@ const initCanvas = () => {
     particles.push(new Particle());
   }
 
-  // Draw connecting lines
+  // Draw connecting lines (desktop only — O(n²) cost is too high for mobile)
   const drawLines = () => {
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
@@ -387,11 +391,16 @@ const initCanvas = () => {
       particle.draw();
     });
 
-    drawLines();
+    if (showLines) drawLines();
     animationId = requestAnimationFrame(animate);
   };
 
-  animate();
+  // Defer canvas start to idle time — doesn't block initial render
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => animate(), { timeout: 1500 });
+  } else {
+    setTimeout(animate, 300);
+  }
 
   // Pause animation when tab is not visible
   document.addEventListener('visibilitychange', () => {
@@ -474,59 +483,8 @@ const showFormStatus = (message, type) => {
 };
 
 // ==================== Smooth Scroll Behavior ====================
-
-// Polyfill for smooth scrolling in older browsers
-const smoothScrollPolyfill = () => {
-  if (!window.requestAnimationFrame) {
-    return;
-  }
-
-  const links = document.querySelectorAll('a[href^="#"]');
-  
-  links.forEach(link => {
-    link.addEventListener('click', (e) => {
-      const href = link.getAttribute('href');
-      
-      if (href === '#' || href === '') return;
-      
-      const target = document.querySelector(href);
-      
-      if (target) {
-        e.preventDefault();
-        
-        const startPosition = window.scrollY;
-        const headerHeight = siteHeader ? siteHeader.offsetHeight : 0;
-        const targetPosition = target.offsetTop - headerHeight;
-        const distance = targetPosition - startPosition;
-        const duration = 1000;
-        let start = null;
-
-        const animation = (currentTime) => {
-          if (start === null) start = currentTime;
-          const timeElapsed = currentTime - start;
-          const easeInOutQuad = (t) => {
-            return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-          };
-          const run = easeInOutQuad(timeElapsed / duration);
-          window.scrollTo(0, startPosition + distance * run);
-          
-          if (timeElapsed < duration) {
-            requestAnimationFrame(animation);
-          }
-        };
-        
-        requestAnimationFrame(animation);
-      }
-    });
-  });
-};
-
-// Run polyfill on page load
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', smoothScrollPolyfill);
-} else {
-  smoothScrollPolyfill();
-}
+// Native CSS scroll-behavior:smooth handles this. The custom polyfill
+// added click listeners to every anchor on startup — removed to cut TBT.
 
 // ==================== Accessibility & Performance ====================
 

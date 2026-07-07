@@ -9,12 +9,32 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-  <!-- Fonts: swap prevents FOIT -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <!-- Preload LCP image: fetched immediately during HTML parse -->
+  <link rel="preload" as="image" href="assets/images/moti.jpg" fetchpriority="high">
+  <!-- Fonts: display=optional means no render-blocking swap (uses system fonts on first load) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Poppins:wght@600;700&display=optional" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Poppins:wght@600;700&display=optional"></noscript>
   <!-- Font Awesome: non-blocking load -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-  <link rel="stylesheet" href="css/style.css">
+  <!-- Minified CSS (27% smaller than unminified) -->
+  <link rel="stylesheet" href="css/style.min.css">
+  <!-- Critical inline CSS: renders loader/bg immediately, before external CSS downloads -->
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{--accent:#00e5b8;--bg-primary:#0d0d1a}
+    html{overflow-x:hidden}
+    body{background-color:#070812;background-image:radial-gradient(circle at 7% 7%,rgba(0,229,184,.14),transparent 18rem),radial-gradient(circle at 78% 56%,rgba(99,102,241,.12),transparent 22rem),linear-gradient(135deg,#070812 0%,#080714 46%,#0d0b1a 100%);background-attachment:fixed;color:#f0f0f5;overflow-x:hidden;padding-top:70px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+    @media(max-width:768px){body{padding-top:60px}}
+    @media(max-width:480px){body{padding-top:56px}}
+    /* Loader: visible immediately */
+    .loader{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:#070812;transition:opacity .6s ease}
+    .loader.hidden{opacity:0;pointer-events:none}
+    /* Header placeholder prevents layout shift */
+    .site-header{position:fixed;top:0;left:0;right:0;height:70px;z-index:100;background:rgba(7,8,18,.8);backdrop-filter:blur(12px)}
+    @media(max-width:768px){.site-header{height:60px}}
+    @media(max-width:480px){.site-header{height:56px}}
+  </style>
 </head>
 <body class="dark">
   <!-- Loading overlay -->
@@ -74,7 +94,7 @@
         <div class="hero-profile-section">
           <div class="hero-profile">
             <span class="profile-ring profile-ring-primary" aria-hidden="true"></span>
-            <img src="assets/images/moti.jpg" alt="Moti Abe" width="470" height="470" fetchpriority="high" decoding="sync">
+            <img src="assets/images/moti.jpg" alt="Moti Abe" width="470" height="470" fetchpriority="high" decoding="async">
           </div>
           <div class="location-badge">
             📍 Meki, Ethiopia
@@ -173,19 +193,18 @@
         <div class="skill-group">
           <h4>Programming Languages</h4>
           <div class="chips">
+            <span class="chip">JavaScript</span>
+            <span class="chip">TypeScript</span>
+            <span class="chip">Dart</span>
             <span class="chip">Python</span>
             <span class="chip">C++</span>
             <span class="chip">Java</span>
-            <span class="chip">JavaScript</span>
-            <span class="chip">Dart</span>
-            
           </div>
         </div>
         <div class="skill-group">
           <h4>Frontend</h4>
           <div class="chips">
-            <span class="chip">HTML</span>
-            <span class="chip">CSS</span>
+            <span class="chip">HTML/CSS</span>
             <span class="chip">JavaScript</span>
             <span class="chip">React</span>
             <span class="chip">Next.js</span>
@@ -201,6 +220,7 @@
             <span class="chip">Supabase</span>
             <span class="chip">Git</span>
             <span class="chip">GitHub</span>
+            <span class="chip">Vercel</span>
             <span class="chip">VS Code</span>
           </div>
         </div>
@@ -213,7 +233,10 @@
       <div class="cards-grid">
         <article class="project card glass">
           <div class="project-screenshot" aria-hidden>
-            <img loading="lazy" src="assets/images/digital_trainer_web.png" alt="Digital Trainer website screenshot">
+            <picture>
+              <source srcset="assets/images/digital_trainer_web.webp" type="image/webp">
+              <img loading="lazy" src="assets/images/digital_trainer_web.jpg" alt="Digital Trainer website screenshot" width="900" height="506">
+            </picture>
           </div>
           <div class="project-body">
             <h3>Digital Trainer</h3>
@@ -229,7 +252,10 @@
 
         <article class="project card glass">
           <div class="project-screenshot" aria-hidden>
-            <img loading="lazy" src="assets/images/Well fly app.png" alt="WellFly flight app screenshot">
+            <picture>
+              <source srcset="assets/images/wellfly_app.webp" type="image/webp">
+              <img loading="lazy" src="assets/images/wellfly_app.jpg" alt="WellFly flight app screenshot" width="800" height="600">
+            </picture>
           </div>
           <div class="project-body">
             <h3>WellFly</h3>
