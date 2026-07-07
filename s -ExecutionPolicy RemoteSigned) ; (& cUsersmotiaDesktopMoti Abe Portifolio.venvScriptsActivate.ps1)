@@ -1,0 +1,31 @@
+[33m595af82[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m chore: optimize images and add WebP fallbacks
+[33mdd24fa9[m desktop responsiveness done
+[33m7291f4c[m mobile first responsiveness
+[33me46ddd9[m loading animation done
+[33me9d8a5f[m Refine mobile nav behavior and spacing
+[33mff1315d[m Improve responsive layout and hero/header behavior
+[33m17eb055[m Update homepage styling and unify site backgrounds
+[33md5dc8e6[m home page done
+[33mbfd43dc[m Update README.md
+[33m802e149[m Update README.md
+[33me6bca52[m Update README.md
+[33maf1100b[m Update portfolio: optimize performance, add project images, update content
+[33m0b2a7ac[m Add mobile margin constraints to all grid sections for consistent spacing
+[33mc847385[m Align hero content and update description with fitness passion
+[33m3ad979d[m Update hero section: redesign description layout, convert buttons to 2x2 grid, adjust social icons positioning and sizing
+[33m95b25e7[m Update profile animation to match emrevarol.com with rotating dashed border
+[33m1618dc0[m Add rotating dashes animation and fix profile to perfect circle
+[33m3f35d30[m Add typing animation for titles and enhance profile image with rotating gradient border and pulsing glow
+[33mc4db1cd[m Update portfolio changes
+[33mb917e93[m fix: improve responsive design for mobile, tablet, and desktop
+[33ma41dcd9[m fix: further reduce social media icon sizes for minimal design
+[33m8f7ba4e[m fix: reduce icon sizes further and update Twitter icon
+[33m9baa633[m fix: reposition social media icons to center between content and profile
+[33mf2ced89[m feat: redesign hero section with emrevarol.com style layout and animations
+[33mbca56e0[m Align navigation links to the right corner
+[33mc4fb01d[m Improve navigation bar: fix header positioning, enhance text visibility in dark mode
+[33mce92292[m Add light/dark mode toggle with theme persistence: theme toggle button in nav, light mode CSS variables, localStorage support, smooth transitions
+[33m356e9b2[m Enhanced design to match emrevarol.com: teal accent colors, two-column hero layout, circular profile, social icons, gradient text, premium styling
+[33me43f443[m Merge remote repository with new portfolio implementation
+[33md6fddfe[m Initial portfolio commit: Professional dark theme portfolio with glassmorphism, animations, and responsive design
+[33mda75ae8[m Initial commit
