@@ -2248,12 +2248,16 @@ img[loading="lazy"] {
 .reveal {
   opacity: 0;
   transform: translateY(30px);
-  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* Specific properties are cheaper than `all` */
+  transition: opacity 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
+              transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: opacity, transform;
 }
 
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
+  will-change: auto; /* Release hint after animation completes */
 }
 
 /* ==================== */
@@ -2906,6 +2910,26 @@ body.light .social-icon {
 /* ==================== */
 /* Performance & Animations */
 /* ==================== */
+
+/* Promote animated elements to their own compositor layer */
+.hero-canvas {
+  will-change: contents; /* Particle canvas repaints every frame */
+}
+
+.loader-ring-outer,
+.loader-ring-inner {
+  will-change: transform;
+}
+
+.hero-content,
+.hero-profile-section {
+  will-change: opacity, transform; /* Fade-in animations */
+}
+
+/* Image rendering optimisation */
+img {
+  image-rendering: auto;
+}
 
 @media (prefers-reduced-motion: reduce) {
   * {

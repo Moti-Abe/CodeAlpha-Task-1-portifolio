@@ -2,6 +2,17 @@
 /* Portfolio JavaScript */
 /* ==================== */
 
+// ==================== Utility Functions ====================
+
+// Debounce: limits how often a function fires (perf-critical for scroll/resize)
+const debounce = (func, delay) => {
+  let timeout;
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func(...args), delay);
+  };
+};
+
 // ==================== DOM Elements ====================
 const loader = document.getElementById('loader');
 const navToggle = document.getElementById('nav-toggle');
@@ -236,7 +247,7 @@ navItems.forEach(link => {
 });
 
 // Update navigation highlighting based on scroll position
-window.addEventListener('scroll', () => {
+const onScroll = debounce(() => {
   // Update header style on scroll
   if (window.scrollY > 50) {
     siteHeader.classList.add('scrolled');
@@ -250,8 +261,6 @@ window.addEventListener('scroll', () => {
   
   sections.forEach(section => {
     const sectionTop = section.offsetTop;
-    const sectionHeight = section.clientHeight;
-    
     if (window.scrollY >= sectionTop - 200) {
       current = section.getAttribute('id');
     }
@@ -263,7 +272,9 @@ window.addEventListener('scroll', () => {
       link.classList.add('active');
     }
   });
-});
+}, 80);
+
+window.addEventListener('scroll', onScroll, { passive: true });
 
 // ==================== Reveal Animations ====================
 
@@ -366,7 +377,8 @@ const initCanvas = () => {
     }
   };
 
-  // Animation loop
+  // Animation loop — paused when page is hidden to save CPU
+  let animationId;
   const animate = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -376,10 +388,19 @@ const initCanvas = () => {
     });
 
     drawLines();
-    requestAnimationFrame(animate);
+    animationId = requestAnimationFrame(animate);
   };
 
   animate();
+
+  // Pause animation when tab is not visible
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      cancelAnimationFrame(animationId);
+    } else {
+      animate();
+    }
+  });
 };
 
 // Initialize canvas after page load
@@ -512,8 +533,9 @@ if (document.readyState === 'loading') {
 // Detect if user prefers reduced motion
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-if (!prefersReducedMotion) {
-  // Add reveal animations only if user doesn't prefer reduced motion
+// observeElements() is already triggered in the 'load' event above.
+// Only run it now if page is already loaded (no 'load' event will fire).
+if (!prefersReducedMotion && document.readyState === 'complete') {
   observeElements();
 }
 
@@ -535,16 +557,9 @@ if ('IntersectionObserver' in window) {
   });
 }
 
-// ==================== Utility Functions ====================
 
-// Debounce function for scroll events
-const debounce = (func, delay) => {
-  let timeout;
-  return (...args) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func(...args), delay);
-  };
-};
+// ==================== Utility Functions ====================
+// (debounce is defined at the top of the file)
 
 // Check if element is in viewport
 const isInViewport = (element) => {
@@ -559,16 +574,7 @@ const isInViewport = (element) => {
 
 // ==================== Page Performance ====================
 
-// Prefetch critical resources
-window.addEventListener('load', () => {
-  // This helps improve performance for subsequent navigation
-  const link = document.createElement('link');
-  link.rel = 'prefetch';
-  link.href = 'css/style.css';
-  document.head.appendChild(link);
-});
-
-// Log performance metrics
+// Log performance metrics (dev only)
 if (window.performance && window.performance.timing) {
   window.addEventListener('load', () => {
     const perfData = window.performance.timing;
